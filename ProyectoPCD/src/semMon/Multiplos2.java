@@ -29,16 +29,25 @@ public class Multiplos2 extends Thread {
 				e.printStackTrace();
 			}
 			Main.mutex.release();
-			if (index < buffer2.size()) {
-				try {
-					monitor2.insertarMult2(buffer2.get(index));
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				index++;
+
+		}
+		try {
+			monitor2.imprimirMultIn(2);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		for (Integer num : buffer2) {
+			System.out.print(num + ",");
+		}
+		System.out.println();
+		monitor2.imprimirMultOut();
+		for (Integer num : buffer2) {
+			try {
+				monitor2.insertarMult2(num);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
-
 	}
 
 }

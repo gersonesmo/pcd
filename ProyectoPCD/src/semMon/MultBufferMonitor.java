@@ -9,7 +9,10 @@ public class MultBufferMonitor {
 	private Condition multiplo2;
 	private Condition multiplo3;
 	private Condition multiplo5;
+	private Condition imprimir2, imprimir3, imprimir5;
 	private int[] bufferMezclador;
+	private boolean printing;
+	private boolean end;
 
 	MultBufferMonitor() {
 		l = new ReentrantLock();
@@ -17,8 +20,14 @@ public class MultBufferMonitor {
 		multiplo2 = l.newCondition();
 		multiplo3 = l.newCondition();
 		multiplo5 = l.newCondition();
+		imprimir2 = l.newCondition();
+		imprimir3 = l.newCondition();
+		imprimir5 = l.newCondition();
 		bufferMezclador = new int[3];
+		printing = false;
+		end = false;
 	}
+
 
 	public void insertarMult2(int mult) throws InterruptedException {
 		l.lock();
@@ -62,15 +71,22 @@ public class MultBufferMonitor {
 
 	}
 
-	public void imprimirBufferMezclador(int[] buffer)
+	public void entrarImprimir(int[] buffer)
 			throws InterruptedException {
 		l.lock();
 		try {
-			while (bufferMezclador[0] == 0 || bufferMezclador[1] == 0
-					|| bufferMezclador[2] == 0)
-				mezclador.await();
-			System.arraycopy(bufferMezclador, 0, buffer, 0, buffer.length);
-
+			if (!end) {
+				while (bufferMezclador[0] == 0 || bufferMezclador[1] == 0
+						|| bufferMezclador[2] == 0)
+					mezclador.await();
+				System.arraycopy(bufferMezclador, 0, buffer, 0, buffer.length);
+			}
+			else {
+				bufferMezclador[1] = 1 << 25;
+				if (bufferMezclador[0] == 0)
+					bufferMezclador[0] = 1 << 25;
+				System.arraycopy(bufferMezclador, 0, buffer, 0, buffer.length);
+			}
 		} finally {
 			l.unlock();
 		}
@@ -85,8 +101,49 @@ public class MultBufferMonitor {
 			multiplo3.signal();
 		else
 			multiplo5.signal();
-	
-		
+		if (bufferMezclador[0] == 10000 && bufferMezclador[2] == 10000)
+			end = true;
+
+		l.unlock();
+	}
+	public void imprimirMultIn(int mult) throws InterruptedException{
+		l.lock();
+		if (mult==2){
+			try {
+				while (printing)
+					imprimir2.await();
+				printing = true;
+			}finally {
+				l.unlock();
+			}
+		}if (mult==3){
+			try {
+				while (printing)
+					imprimir3.await();
+				printing = true;
+			}finally {
+				l.unlock();
+			}
+		}if (mult==5){
+			try {
+				while (printing)
+					imprimir5.await();
+				printing = true;
+			}finally {
+				l.unlock();
+			}
+		}
+	}
+
+	public void imprimirMultOut(){
+		l.lock();
+		printing = false;
+		if (l.hasWaiters(imprimir2))
+			imprimir2.signal();
+		else if (l.hasWaiters(imprimir3))
+			imprimir3.signal();
+		else if (l.hasWaiters(imprimir5))
+			imprimir5.signal();
 		l.unlock();
 	}
 }

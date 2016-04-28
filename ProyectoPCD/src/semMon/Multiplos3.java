@@ -30,13 +30,23 @@ public class Multiplos3 extends Thread {
 				e.printStackTrace();
 			}
 			Main.mutex.release();
-			if (index < buffer3.size()) {
-				try {
-					monitor3.insertarMult3(buffer3.get(index));
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				index++;
+
+		}
+		try {
+			monitor3.imprimirMultIn(3);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		for (Integer num : buffer3) {
+			System.out.print(num + ",");
+		}
+		System.out.println();
+		monitor3.imprimirMultOut();
+		for (Integer num : buffer3) {
+			try {
+				monitor3.insertarMult3(num);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
 	}

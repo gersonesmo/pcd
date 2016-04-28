@@ -30,13 +30,22 @@ public class Multiplos5 extends Thread {
 				e.printStackTrace();
 			}
 			Main.mutex.release();
-			if (index < buffer5.size()){
-				try {
-					monitor5.insertarMult5(buffer5.get(index));
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				index++;
+		}
+		try {
+			monitor5.imprimirMultIn(5);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		for (Integer num : buffer5) {
+			System.out.print(num + ",");
+		}
+		System.out.println();
+		monitor5.imprimirMultOut();
+		for (Integer num : buffer5) {
+			try {
+				monitor5.insertarMult5(num);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
 	} 

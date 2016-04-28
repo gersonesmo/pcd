@@ -14,7 +14,6 @@ public class Main {
 	public static MultBufferMonitor monitor = new MultBufferMonitor();
 
 	public static void main(String[] args) {
-		
 		for (int i = 0; i < bufferCompartido.length; i++) {
 			bufferCompartido[i] = new Buffer();
 		}
