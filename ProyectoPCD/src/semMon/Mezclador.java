@@ -26,7 +26,7 @@ public class Mezclador extends Thread {
 		for (int i = 0; i < 10333; i++) {
 			try {
 				monitorMezclador.entrarImprimir(bufferMezclador);
-				System.out.print(bufferMezclador[minimo()] + ",");
+				System.out.print(bufferMezclador[minimo()] + " ");
 				monitorMezclador.outImprimir(minimo());
 			} catch (InterruptedException e) {
 				e.printStackTrace();

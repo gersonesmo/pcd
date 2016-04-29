@@ -37,7 +37,7 @@ public class Multiplos2 extends Thread {
 			e.printStackTrace();
 		}
 		for (Integer num : buffer2) {
-			System.out.print(num + ",");
+			System.out.print(num + " ");
 		}
 		System.out.println();
 		monitor2.imprimirMultOut();
