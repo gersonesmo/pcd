@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 
 public class Multiplos5 extends Thread {
-	private LinkedList<Integer> buffer5 = new LinkedList<Integer>();
+	private LinkedList<Integer> buffer5 = new LinkedList<>();
 	private MultBufferMonitor monitor5;
 
 

@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class Multiplos2 extends Thread {
 	
-	private LinkedList<Integer> buffer2 = new LinkedList<Integer>();
+	private LinkedList<Integer> buffer2 = new LinkedList<>();
 	private MultBufferMonitor monitor2;
 
 	Multiplos2(MultBufferMonitor monitor) {
@@ -13,7 +13,6 @@ public class Multiplos2 extends Thread {
 
 	@Override
 	public void run() {
-		int index = 0;
 		for (int i = 0; i < 10000; i++) {
 			try {
 				Main.vacios2.acquire();

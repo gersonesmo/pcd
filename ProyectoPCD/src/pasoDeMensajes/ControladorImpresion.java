@@ -1,7 +1,6 @@
 package pasoDeMensajes;
 
 import messagepassing.Channel;
-import messagepassing.CommunicationScheme;
 import messagepassing.Selector;
 
 /**
@@ -24,7 +23,7 @@ public class ControladorImpresion extends Thread {
     }
 
     public void run(){
-        for (int i = 0; i < 10333; i++) {
+        for (int i = 0; i < 3; i++) {
             mult2.setGuardValue(!imprimiendo);
             mult3.setGuardValue(!imprimiendo);
             mult5.setGuardValue(!imprimiendo);

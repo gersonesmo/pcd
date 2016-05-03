@@ -1,7 +1,6 @@
 package EjercicioChannel;
 
 import messagepassing.Channel;
-import messagepassing.CommunicationScheme;
 
 import java.util.Random;
 

@@ -13,17 +13,10 @@ public class Mult5 extends Thread {
 	public Mult5(CommunicationScheme buzonSend, CommunicationScheme buzonReceive, Channel controlador, Channel mezclador){
 		this.buzonSend = buzonSend;
 		this.buzonReceive = buzonReceive;
-		this.buffer = new int[5000];
+		this.buffer = new int[2000];
 		this.frenteBuffer = 0;
 		this.controlador = controlador;
 		this.mezclador = mezclador;
-	}
-	
-	public Mult5(CommunicationScheme buzonSend, CommunicationScheme buzonReceive){
-		this.buzonSend = buzonSend;
-		this.buzonReceive = buzonReceive;
-		this.buffer = new int[5000];
-		this.frenteBuffer = 0;
 	}
 	
 	public void run(){
@@ -37,12 +30,13 @@ public class Mult5 extends Thread {
 		}
 		controlador.send("Quiero imprimir");
 		controlador.receive();
-		for (int i = 0; i < buffer.length; i++) {
-			System.out.print(buffer[i] + " ");
+		for (int aBuffer : buffer) {
+			System.out.print(aBuffer + " ");
 		}
+		System.out.println();
 		controlador.send("He acabado");
-		for (int i = 0; i < buffer.length; i++) {
-			mezclador.send(buffer[i]);
+		for (int aBuffer : buffer) {
+			mezclador.send(aBuffer);
 		}
 	}
 }

@@ -9,7 +9,7 @@ public class Productor implements Runnable {
     public void run() {
         int i = 0;
         while (true) {
-            canal.send(new Integer(i));
+            canal.send(i);
             System.out.println("Enviado " + i);
             i++;
             try {

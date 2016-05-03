@@ -45,15 +45,17 @@ public class Mezclador extends Thread {
                     mult = (int)mult2.receive();
                     buffer[0] = mult;
                     if (buffer[1] != 0 && buffer[2] != 0){
-                        System.out.print(buffer[minimo()]);
+                        System.out.print(buffer[minimo()] + " ");
                         buffer[minimo()] = 0;
+                        if (buffer[0] == 10000 && buffer[2] == 10000)
+                            System.out.println(buffer[0] + " " + buffer[2]);
                     }
                     break;
                 case 2:
                     mult = (int)mult3.receive();
                     buffer[1] = mult;
                     if (buffer[0] != 0 && buffer[2] != 0){
-                        System.out.print(buffer[minimo()]);
+                        System.out.print(buffer[minimo()] + " ");
                         buffer[minimo()] = 0;
                     }
                     break;
@@ -61,8 +63,10 @@ public class Mezclador extends Thread {
                     mult = (int)mult5.receive();
                     buffer[2] = mult;
                     if (buffer[0] != 0 && buffer[1] != 0) {
-                        System.out.print(buffer[minimo()]);
+                        System.out.print(buffer[minimo()] + " ");
                         buffer[minimo()] = 0;
+                        if (buffer[0] == 10000 && buffer[2] == 10000)
+                            System.out.println(buffer[0] + " " + buffer[2]);
                     }
                     break;
             }

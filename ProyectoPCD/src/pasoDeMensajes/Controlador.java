@@ -52,7 +52,6 @@ public class Controlador extends Thread {
 
     public void run() {
         int elem;
-
         for (int i = 0; i < 50000; i++) {
             generador.setGuardValue(nElemBuffer < 10);
             basurero.setGuardValue(buffer[frenteBas].getContador() == 3);
@@ -61,41 +60,40 @@ public class Controlador extends Thread {
             mult5S.setGuardValue(cont5 > 0);
             switch (s.selectOrBlock()) {
                 case 1:
-                    System.out.println("Case 1");
                     elem = (int) generador.receive();
                     buffer[frenteGen].setValor(elem);
-                    frenteGen = frenteGen++ % 10;
+                    frenteGen = (frenteGen+1) % 10;
                     nElemBuffer++;
                     cont2++;
                     cont3++;
                     cont5++;
                     break;
                 case 2:
-                    System.out.println("Case 2");
                     basurero.receive();
                     buffer[frenteBas].setContador(0);
                     buffer[frenteBas].setValor(0);
+                    frenteBas = (frenteBas+1) % 10;
                     nElemBuffer--;
                     break;
                 case 3:
-                    System.out.println("Case 3");
                     mult2S.receive();
                     mult2R.send(buffer[frente2].getValor());
-                    frente2 = frente2++ % 10;
+                    buffer[frente2].setContador(buffer[frente2].getContador()+1);
+                    frente2 = (frente2+1) % 10;
                     cont2--;
                     break;
                 case 4:
-                    System.out.println("Case 4");
                     mult3S.receive();
                     mult3R.send(buffer[frente3].getValor());
-                    frente3 = frente3++ % 10;
+                    buffer[frente3].setContador(buffer[frente3].getContador()+1);
+                    frente3 = (frente3+1) % 10;
                     cont3--;
                     break;
                 case 5:
-                    System.out.println("Case 5");
                     mult5S.receive();
                     mult5R.send(buffer[frente5].getValor());
-                    frente5 = frente5++ % 10;
+                    buffer[frente5].setContador(buffer[frente5].getContador()+1);
+                    frente5 = (frente5+1) % 10;
                     cont5--;
                     break;
             }

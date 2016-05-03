@@ -23,12 +23,11 @@ class Buffer implements Runnable {
     private Channel pb;
     private Channel bc;
     private int capacidad = 0;
-    private Selector s = null;
     private List<Object> buffer = null;
     public Buffer(Channel pb, Channel bc, int capacidad) {
         this.pb = pb;
         this.bc = bc;
-        buffer = new ArrayList<Object>();
+        buffer = new ArrayList<>();
         this.capacidad = capacidad;
     }
     public void run() {
@@ -36,7 +35,7 @@ class Buffer implements Runnable {
             Thread.sleep(300);
         } catch (InterruptedException ex) {
         }
-        s = new Selector();
+        Selector s = new Selector();
         s.addSelectable(pb,false);
         s.addSelectable(bc,true); // El channel bc se usará para enviar
         if (capacidad == 0) {
