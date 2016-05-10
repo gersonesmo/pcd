@@ -1,7 +1,18 @@
+/*
+ * Copyright (c) 2016. Archive created by Gerson Esquembri Moreno.
+ */
+
+
+
 package semMon;
 
 import java.util.LinkedList;
 
+/**
+ * Hilo que comprobará si el número insertado en el buffer compartido
+ * es múltiplo de 3. De ser así, lo guardará en un buffer propio,
+ * y luego este buffer será impreso en la consola.
+ */
 public class Multiplos3 extends Thread {
 
 	private LinkedList<Integer> buffer3 = new LinkedList<>();

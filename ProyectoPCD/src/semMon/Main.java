@@ -1,7 +1,14 @@
-package semMon;
+/*
+ * Copyright (c) 2016. Archive created by Gerson Esquembri Moreno.
+ */
 
+package semMon;
 import java.util.concurrent.Semaphore;
 
+/**
+* Clase principal, en la que se crearán los distintos semáforos,
+* el monitor, y se iniciarán los hilos del programa.
+*/
 public class Main {
 
 	public static volatile Buffer[] bufferCompartido = new Buffer[10];

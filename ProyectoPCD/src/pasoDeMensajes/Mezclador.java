@@ -1,11 +1,18 @@
+/*
+ * Copyright (c) 2016. Archive created by Gerson Esquembri Moreno.
+ */
+
 package pasoDeMensajes;
 
 import messagepassing.Channel;
 import messagepassing.Selector;
 
 /**
- * Created by GersonEsquembri on 29/04/2016.
+ * Hilo encargado de gestionar la impresión de los números del mezclador,
+ * es decir, todos aquellos que sean múltiplos de 2, 3 ó 5, en el
+ * orden correcto.
  */
+
 public class Mezclador extends Thread {
     private Channel mult2, mult3, mult5;
     private int[] buffer;

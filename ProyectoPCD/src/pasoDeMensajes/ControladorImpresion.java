@@ -1,10 +1,15 @@
+/*
+ * Copyright (c) 2016. Archive created by Gerson Esquembri Moreno.
+ */
+
 package pasoDeMensajes;
 
 import messagepassing.Channel;
 import messagepassing.Selector;
 
 /**
- * Created by GersonEsquembri on 29/04/2016.
+ * Hilo encargado de gestionar la sincronización entre los hilos
+ * de los múltiplos, para la impresión de estos.
  */
 public class ControladorImpresion extends Thread {
     private Channel mult2, mult3, mult5;

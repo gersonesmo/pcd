@@ -1,5 +1,15 @@
+/*
+ * Copyright (c) 2016. Archive created by Gerson Esquembri Moreno.
+ */
+
+
 package semMon;
 
+/**
+ * Limpiará aquellas posiciones del buffer que hayan sido
+ * leídas por todos los hilos de múltiplos, poniendo
+ * el número y el contador a 0.
+ */
 public class RecolectorBasura extends Thread {
 	@Override
 	public void run() {

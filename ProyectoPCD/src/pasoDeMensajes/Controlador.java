@@ -1,8 +1,17 @@
+/*
+ * Copyright (c) 2016. Archive created by Gerson Esquembri Moreno.
+ */
+
+
 package pasoDeMensajes;
 
 import messagepassing.MailBox;
 import messagepassing.Selector;
 
+/**
+ * Hilo encargado de gestionar la sincronización del buffer compartido
+ * con los hilos de los múltiplos, el hilo generador y el recolector de basura.
+ */
 public class Controlador extends Thread {
     private MailBox generador, basurero, mult2S, mult2R, mult3S, mult3R,
             mult5S, mult5R;
@@ -62,7 +71,7 @@ public class Controlador extends Thread {
                 case 1:
                     elem = (int) generador.receive();
                     buffer[frenteGen].setValor(elem);
-                    frenteGen = (frenteGen+1) % 10;
+                    frenteGen = (frenteGen + 1) % 10;
                     nElemBuffer++;
                     cont2++;
                     cont3++;

@@ -1,7 +1,15 @@
+/*
+ * Copyright (c) 2016. Archive created by Gerson Esquembri Moreno.
+ */
+
 package semMon;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
+/**
+ * Controlador de toda la concurrencia que hay entre
+ * los hilos de múltiplos y el mezclador.
+ */
 
 public class MultBufferMonitor {
 	private ReentrantLock l;
@@ -28,7 +36,12 @@ public class MultBufferMonitor {
 		end = false;
 	}
 
-
+	/**
+	 * Inserta un número en la segunda posición
+	 * del buffer del mezclador.
+	 * @param mult Número a insertar en el buffer.
+	 * @throws InterruptedException
+	 */
 	public void insertarMult2(int mult) throws InterruptedException {
 		l.lock();
 		try {
@@ -43,6 +56,12 @@ public class MultBufferMonitor {
 
 	}
 
+	/**
+	 * Inserta un número en la segunda posición
+	 * del buffer del mezclador.
+	 * @param mult Número a insertar en el buffer.
+	 * @throws InterruptedException
+     */
 	public void insertarMult3(int mult) throws InterruptedException {
 		l.lock();
 		try {
@@ -56,7 +75,12 @@ public class MultBufferMonitor {
 		}
 
 	}
-
+	/**
+	 * Inserta un número en la tercera posición
+	 * del buffer del mezclador.
+	 * @param mult Número a insertar en el buffer.
+	 * @throws InterruptedException
+	 */
 	public void insertarMult5(int mult) throws InterruptedException {
 		l.lock();
 		try {
@@ -71,7 +95,14 @@ public class MultBufferMonitor {
 
 	}
 
-	public void entrarImprimir(int[] buffer)
+	/**
+	 * Protocolo de entrada para el mezclador.
+	 * Esperará mientras no haya números distintos de 0 en cada
+	 * una de las posiciones del buffer del mezclador.
+	 * @param buffer Buffer que se copiará en el buffer del mezclador.
+	 * @throws InterruptedException
+     */
+	public void entrarImprimirMezc(int[] buffer)
 			throws InterruptedException {
 		l.lock();
 		try {
@@ -92,7 +123,13 @@ public class MultBufferMonitor {
 		}
 	}
 
-	public void outImprimir(int pos) {
+	/**
+	 * Protocolo de salida del mezclador, dará paso a
+	 * aquel múltiplo cuya posición del buffer esté vacía.
+	 * @param pos Posición que se pondrá a 0, para posteriormente
+	 *            liberar el hilo que llamó al método.
+     */
+	public void outImprimirMezc(int pos) {
 		l.lock();
 		bufferMezclador[pos] = 0;
 		if (bufferMezclador[0] == 0)
@@ -106,6 +143,15 @@ public class MultBufferMonitor {
 
 		l.unlock();
 	}
+
+	/**
+	 * Protocolo de entrada de la impresión de los hilos
+	 * de los múltiplos. Si hay alguien imprimiendo el hilo
+	 * que quiere imprimir se esperará hasta que no haya nadie
+	 * imprimiendo.
+	 * @param mult Múltiplo que ha pedido tener acceso a la impresión.
+	 * @throws InterruptedException
+     */
 	public void imprimirMultIn(int mult) throws InterruptedException{
 		l.lock();
 		if (mult==2){
@@ -135,6 +181,11 @@ public class MultBufferMonitor {
 		}
 	}
 
+	/**
+	 * Protocolo de salida de la impresión de los hilos de los
+	 * múltiplos. Si en la cola de condición de alguno de ellos
+	 * hay alguien esperando, se le dará paso a dicho hilo.
+	 */
 	public void imprimirMultOut(){
 		l.lock();
 		printing = false;

@@ -1,8 +1,17 @@
+/*
+ * Copyright (c) 2016. Archive created by Gerson Esquembri Moreno.
+ */
+
 package pasoDeMensajes;
 
 import messagepassing.Channel;
 import messagepassing.CommunicationScheme;
 
+/**
+ * Hilo encargado de coger aquellos números del buffer compartido
+ * que sean múltiplos de 2, para luego imprimirlos. También los
+ * mandará al hilo mezclador, para que este los imprima luego.
+ */
 public class Mult3 extends Thread {
 	private CommunicationScheme buzonSend;
 	private CommunicationScheme buzonReceive;

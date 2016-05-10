@@ -1,7 +1,16 @@
+/*
+ * Copyright (c) 2016. Archive created by Gerson Esquembri Moreno.
+ */
+
 package semMon;
 
 import java.util.LinkedList;
 
+/**
+* Hilo que comprobará si el número insertado en el buffer compartido
+* es múltiplo de 2. De ser así, lo guardará en un buffer propio,
+* y luego este buffer será impreso en la consola.
+ */
 public class Multiplos2 extends Thread {
 	
 	private LinkedList<Integer> buffer2 = new LinkedList<>();

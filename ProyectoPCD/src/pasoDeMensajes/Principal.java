@@ -1,11 +1,17 @@
+/*
+ * Copyright (c) 2016. Archive created by Gerson Esquembri Moreno.
+ */
+
 package pasoDeMensajes;
 
 import messagepassing.Channel;
 import messagepassing.MailBox;
 
 /**
- * Created by GersonEsquembri on 28/04/2016.
+ * Clase principal, en la que se crearán todos los buzones, canales
+ * e hilos, y en la que estos últimos serán iniciados.
  */
+
 public class Principal {
     public static void main(String[] args){
         MailBox generador = new MailBox();

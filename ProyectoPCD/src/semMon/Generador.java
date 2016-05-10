@@ -1,7 +1,11 @@
 package semMon;
 
-import semMon.Main;
-
+/**
+* Estructura de datos que contiene dos enteros,
+* el número insertado por el generador y un
+* contador para controlar que todos los hilos
+* de múltiplos hayan leído una posición.
+*/
 class Buffer {
  int num;
  int cont;
@@ -10,7 +14,10 @@ class Buffer {
 		 cont = 0;
 	 }
  }
-
+/**
+* Genera los números del 1 al 10000 y los va insertando
+* en el buffer compartido.
+*/
 public class Generador extends Thread {
 
 	static int frenteCompartido;
@@ -26,8 +33,8 @@ public class Generador extends Thread {
 				Main.generador.acquire();
 				Main.mutex.acquire();
 				Main.bufferCompartido[frenteCompartido].num = i;
-				Main.bufferCompartido[frenteCompartido].cont = 0;
 			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 
 			frenteCompartido = (frenteCompartido + 1) % 10;
